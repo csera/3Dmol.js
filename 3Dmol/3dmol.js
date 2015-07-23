@@ -116,7 +116,29 @@ $3Dmol.download = function(query, viewer, options, callback) {
    
    return m;
 };
-       
+  
+/**
+ * Load a local file passed by the container into the viewer.
+ * @author csera
+ * @function $3Dmol.loadFile
+ * @param {string} The parsed data read from the file
+ * @param {string} Detected file type
+ * @param {$3Dmol.GLViewer} viewer - Add new model to existing viewer
+ *
+ * @return {$3Dmol.GLmodel} GLmodel
+ */
+$3Dmol.loadFile = function(data, type, viewer, options, callback){
+	var m = viewer.addModel();
+	
+	m.addMolData(data, type, options);
+	viewer.zoomTo();
+	viewer.render();
+	
+	if (callback)
+		callback(m);
+	
+	return m;
+};     
 
 /**
  * $3Dmol surface types
